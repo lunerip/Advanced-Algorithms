@@ -2,8 +2,8 @@ from datetime import datetime
 from tkinter import *
 from tkinter import filedialog
 import csv
-import numpy as np
 import os, sys, subprocess
+import numpy as np
 
 # AUTHOR: Luis Enrique Neri Pérez
 # Copyright 2019
@@ -14,6 +14,7 @@ import os, sys, subprocess
 matrixes = [[],[]]
 textCounter = 0
 sCounter = 0
+global window
 
 def matrixMultiplication(a, b):
     row = []
@@ -177,42 +178,50 @@ def openFile(filename):
         opener ="open" if sys.platform == "darwin" else "xdg-open"
         subprocess.call([opener, filename])
 
-def main():
 
-    window = Tk()
-    # Window configuration
-    window.title("Matrix Multiplications Algorithms")
-    window.resizable(width=FALSE, height=FALSE)
-    window.geometry('720x270')
-
-    # CONTENT
-    # Title
-    wTitle = Label(window, text="Welcome to the Matrix Multiplications")
-    wTitle.config(font=('arial', 30, 'bold'))
-    wTitle.pack()
-
-    wTitle2 = Label(window, text=" Algorithms Tester")
-    wTitle2.config(font=('arial', 30, 'bold'))
-    wTitle2.pack()
-
-    # Instructions
-    wInstructions = Label(window, text="Load two csv files for both Matrix A and Matrix B to multiply them:")
-    wInstructions.config(font=('arial', 15,))
-    wInstructions.pack()
-
-    #Buttons
-    buttonA = Button(text='Matrix A', width=30, command=mfileOpenA).pack()
-    buttonB = Button(text='Matrix B', width=30, command=mfileOpenA).pack()
-
-    # Operations
-    wOperations = Label(window, text="Press the following buttons to see the resultant matrixes and it's execution time")
-    wOperations.config(font=('arial', 15,))
-    wOperations.pack()
-
-    buttonTb = Button(text='Textbook Multiplication', width=30, command=printTextbook).pack()
-    buttonTb = Button(text='Strassens Algorithm Multiplication', width=30, command=printStrassen).pack()
+def install():
+        if 'numpy' not in sys.modules:
+            subprocess.call([sys.executable, "-m", "pip", "install", 'numpy'])
 
 
-    window.mainloop()
 
-main()
+install()
+import numpy as np
+
+global window
+
+window = Tk()
+# Window configuration
+window.title("Matrix Multiplications Algorithms")
+window.resizable(width=FALSE, height=FALSE)
+window.geometry('720x270')
+
+# CONTENT
+# Title
+wTitle = Label(window, text="Welcome to the Matrix Multiplications")
+wTitle.config(font=('arial', 30, 'bold'))
+wTitle.pack()
+
+wTitle2 = Label(window, text=" Algorithms Tester")
+wTitle2.config(font=('arial', 30, 'bold'))
+wTitle2.pack()
+
+# Instructions
+wInstructions = Label(window, text="Load two csv files for both Matrix A and Matrix B to multiply them:")
+wInstructions.config(font=('arial', 15,))
+wInstructions.pack()
+
+#Buttons
+buttonA = Button(text='Matrix A', width=30, command=mfileOpenA).pack()
+buttonB = Button(text='Matrix B', width=30, command=mfileOpenA).pack()
+
+# Operations
+wOperations = Label(window, text="Press the following buttons to see the resultant matrixes and it's execution time")
+wOperations.config(font=('arial', 15,))
+wOperations.pack()
+
+buttonTb = Button(text='Textbook Multiplication', width=30, command=printTextbook).pack()
+buttonTb = Button(text='Strassens Algorithm Multiplication', width=30, command=printStrassen).pack()
+
+
+window.mainloop()
